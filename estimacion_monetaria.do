@@ -35,29 +35,33 @@ global out: establece la dirección dónde se guardarán los resultados
  * Importar base de datos crudos y preparar variables antes de la estimación
  
  import excel using "$path\BDD_informalidad.xlsx", firstrow clear sheet("2001-2021")
- 
  tsset year, yearly
  
- gen bm_m3  = log(1 + (billetes_monedas / m3))
- 
- replace población = población / 1000000
- gen pib_pc = log(1 + (pib_nominal / población))
- 
- gen trib = log(1 + (ingresos_tributarios / pib_nominal))
- 
- gen remu = log(1 + (remuneraciones / pib_nominal))
- 
- gen tir = log(1 + (tasa_real / 100))
+ gen pib_pc = log(pib_percap)
+ gen bm_m3  = log(billetes_monedas / m3)
+ gen bm_m2  = log(billetes_monedas / m2)
+ gen trib   = log(ingresos_tributarios / pib_nominal)
+ gen trib1  = log(ingresos_tributarios)
+ gen remu   = log(remuneraciones / pib_nominal)
+ gen tir    = log(1 + (tasa_real / 100))
  
  gen dum08 = cond(year == 2008, 1, 0)
  gen dum09 = cond(year == 2009, 1, 0)
  
- eststo: prais bm_m3 trib dum08 dum09, vce(robust) ssesearch 
- eststo: prais bm_m3 trib pib_pc dum08 dum09, vce(robust) ssesearch 
- eststo: prais bm_m3 trib pib_pc remu dum08 dum09, vce(robust) ssesearch 
- eststo: prais bm_m3 trib pib_pc remu tir dum08 dum09, vce(robust) ssesearch 
+ eststo drop *
+ eststo eq1a: prais bm_m2 trib1 dum08 dum09, vce(robust) ssesearch 
+ eststo eq1b: prais bm_m2 trib1 pib_pc dum08 dum09, vce(robust) ssesearch 
+ eststo eq1c: prais bm_m2 trib1 pib_pc remu dum08 dum09, vce(robust) ssesearch 
+ eststo eq1d: prais bm_m2 trib1 pib_pc remu tir dum08 dum09, vce(robust) ssesearch
  
+ esttab eq1* using "$out\modelo1.tex", replace f booktabs se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 $R^2$" "rho $\rho$")
  
+ eststo eq2a: prais bm_m3 trib1 dum08 dum09, vce(robust) ssesearch 
+ eststo eq2b: prais bm_m3 trib1 pib_pc dum08 dum09, vce(robust) ssesearch 
+ eststo eq2c: prais bm_m3 trib1 pib_pc remu dum08 dum09, vce(robust) ssesearch 
+ eststo eq2d: prais bm_m3 trib1 pib_pc remu tir dum08 dum09, vce(robust) ssesearch 
+ 
+ esttab eq2* using "$out\modelo2.tex", replace f booktabs se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 $R^2$" "rho $\rho$")
  
  
  
