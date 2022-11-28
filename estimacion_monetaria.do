@@ -47,21 +47,22 @@ global out: establece la dirección dónde se guardarán los resultados
  
  gen dum08 = cond(year == 2008, 1, 0)
  gen dum09 = cond(year == 2009, 1, 0)
+ gen dum20 = cond(year == 2020, 1, 0)
  
  eststo drop *
- eststo eq1a: prais bm_m2 trib1 dum08 dum09, vce(robust) ssesearch 
- eststo eq1b: prais bm_m2 trib1 pib_pc dum08 dum09, vce(robust) ssesearch 
- eststo eq1c: prais bm_m2 trib1 pib_pc remu dum08 dum09, vce(robust) ssesearch 
- eststo eq1d: prais bm_m2 trib1 pib_pc remu tir dum08 dum09, vce(robust) ssesearch
+ eststo eq1a: prais bm_m2 trib1 dum09 dum20, vce(robust) ssesearch 
+ eststo eq1b: prais bm_m2 trib1 pib_pc dum09 dum20, vce(robust) ssesearch 
+ eststo eq1c: prais bm_m2 trib1 pib_pc remu dum09 dum20, vce(robust) ssesearch 
+ eststo eq1d: prais bm_m2 trib1 pib_pc remu tir dum09 dum20, vce(robust) ssesearch
  
- esttab eq1* using "$out\modelo1.tex", replace f booktabs se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 $R^2$" "rho $\rho$")
+ esttab eq1* using "$out\modelo1.tex", replace f booktabs nomtitles se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 R$^2$" "rho $\rho$")
  
- eststo eq2a: prais bm_m3 trib1 dum08 dum09, vce(robust) ssesearch 
- eststo eq2b: prais bm_m3 trib1 pib_pc dum08 dum09, vce(robust) ssesearch 
- eststo eq2c: prais bm_m3 trib1 pib_pc remu dum08 dum09, vce(robust) ssesearch 
- eststo eq2d: prais bm_m3 trib1 pib_pc remu tir dum08 dum09, vce(robust) ssesearch 
+ eststo eq2a: prais bm_m3 trib1 dum09 dum20, vce(robust) ssesearch 
+ eststo eq2b: prais bm_m3 trib1 pib_pc dum09 dum20, vce(robust) ssesearch 
+ eststo eq2c: prais bm_m3 trib1 pib_pc remu dum09 dum20, vce(robust) ssesearch 
+ eststo eq2d: prais bm_m3 trib1 pib_pc remu tir dum09 dum20, vce(robust) ssesearch 
  
- esttab eq2* using "$out\modelo2.tex", replace f booktabs se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 $R^2$" "rho $\rho$")
+ esttab eq2* using "$out\modelo2.tex", replace f booktabs nomtitles se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 R$^2$" "rho $\rho$")
  
  
  
