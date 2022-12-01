@@ -230,11 +230,8 @@ global out: establece la dirección dónde se guardarán los resultados
  loc b7 = _b[dum20]
  loc b8 = _b[dum21]
 
- gen circulante_total = `b0' + (`b1' * trib) + (`b2' * pib_pc) + (`b3' * remu) + (`b4' * d.tir) + (`b5' * trend) + (`b6' * dum09) + (`b7' * dum20) + (`b8' * dum21)
- gen circulante_formal = `b0' + (`b2' * pib_pc) + (`b3' * remu) + (`b4' * d.tir) + (`b5' * trend) + (`b6' * dum09) + (`b7' * dum20) + (`b8' * dum21)
-
- replace circulante_total  = exp(circulante_total)
- replace circulante_formal = exp(circulante_formal)
+ gen circulante_total  = exp(`b0' + (`b1' * trib) + (`b2' * pib_pc) + (`b3' * remu) + (`b4' * d.tir) + (`b5' * trend) + (`b6' * dum09) + (`b7' * dum20) + (`b8' * dum21))
+ gen circulante_formal = exp(`b0' + (`b2' * pib_pc) + (`b3' * remu) + (`b4' * d.tir) + (`b5' * trend) + (`b6' * dum09) + (`b7' * dum20) + (`b8' * dum21))
 
  gen circulante_informal = circulante_total - circulante_formal
 
