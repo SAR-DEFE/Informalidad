@@ -150,21 +150,21 @@ global out: establece la dirección dónde se guardarán los resultados
  * Tasa de interés real I(1)
  varsoc tir, exog(year)                
  
- eststo eq4_a: qui reg d.tir l1.tir ld.tir trend 
+ eststo eq4_a: qui reg d.tir l1.tir trend 
  qui dfuller tir, lags(0) trend reg
  estadd scalar t_df  = r(Zt)
  estadd scalar cv_1  = r(cv_1)
  estadd scalar cv_5  = r(cv_5)
  estadd scalar cv_10 = r(cv_10)
  
- eststo eq4_b: qui reg d.tir l1.tir ld.tir 
+ eststo eq4_b: qui reg d.tir l1.tir
  qui dfuller tir, lags(0) reg
  estadd scalar t_df  = r(Zt)
  estadd scalar cv_1  = r(cv_1)
  estadd scalar cv_5  = r(cv_5)
  estadd scalar cv_10 = r(cv_10)
  
- eststo eq4_c: qui reg d.tir l1.tir ld.tir, noconstant
+ eststo eq4_c: qui reg d.tir l1.tir, noconstant
  qui dfuller tir, lags(0) noconstant reg
  estadd scalar t_df  = r(Zt)
  estadd scalar cv_1  = r(cv_1)
@@ -173,7 +173,7 @@ global out: establece la dirección dónde se guardarán los resultados
  
  esttab eq4_* using "$out\raiz_unitaria.tex", append f booktabs nomtitles nonumbers t(3) b(3) star(* 0.10 ** 0.05 *** 0.01)   ///
         scalars("N Observations" "t_df Valor \textit{t}" "cv_1 DF 1\%" "cv_5 DF 5\%" "cv_10 DF 10\%") eqlabels(none) ///
-		coeflabels(L.tir "(Tasa de interés)$_{t-1}$" LD.tir "$\Delta$ (Tasa de interés)$_{t-1}$" trend "Tendencia" _cons "Constante") ///
+		coeflabels(L.tir "(Tasa de interés)$_{t-1}$" trend "Tendencia" _cons "Constante") ///
 		refcat(L.tir "\textbf{$\Delta$(Tasa de interés)}", nolabel) 
 	
 
