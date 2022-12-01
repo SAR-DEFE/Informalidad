@@ -58,29 +58,123 @@ global out: establece la dirección dónde se guardarán los resultados
  * Pruebas de raíz unitaria
  *******************************************************************************
  
- * Ingresos tributarios I(0)
- varsoc trib, exog(year)                
- dfuller trib, lags(1) trend reg
- dfuller trib, lags(1) reg
- dfuller trib, lags(1) noconstant reg
+ eststo drop *
+ 
+ * Ingresos tributarios I(0) 
+ varsoc trib, exog(year) 
+ 
+ eststo eq1_a: qui reg d.trib l1.trib ld.trib trend 
+ qui dfuller trib, lags(1) trend reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq1_b: qui reg d.trib l1.trib ld.trib 
+ qui dfuller trib, lags(1) reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq1_c: qui reg d.trib l1.trib ld.trib, noconstant
+ qui dfuller trib, lags(1) noconstant reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ esttab eq1_* using "$out\raiz_unitaria.tex", replace f booktabs nomtitles t(3) b(3) star(* 0.10 ** 0.05 *** 0.01)   ///
+        scalars("N Observations" "t_df Valor \textit{t}" "cv_1 DF 1\%" "cv_5 DF 5\%" "cv_10 DF 10\%") eqlabels(none) ///
+		coeflabels(L.trib "(Presión tributaria)$_{t-1}$" LD.trib "$\Delta$ (Presión tributaria)$_{t-1}$" trend "Tendencia" _cons "Constante") ///
+		refcat(L.trib "\textbf{$\Delta$(Presión tributaria)}", nolabel) 
 	
  * Pib per cápita I(0)
- varsoc pib_pc, exog(year)                
- dfuller pib_pc, lags(1) trend reg
- dfuller pib_pc, lags(1) reg
- dfuller pib_pc, lags(1) noconstant reg
+ varsoc pib_pc, exog(year) 
+ 
+ eststo eq2_a: qui reg d.pib_pc l1.pib_pc ld.pib_pc trend 
+ qui dfuller pib_pc, lags(1) trend reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq2_b: qui reg d.pib_pc l1.pib_pc ld.pib_pc 
+ qui dfuller pib_pc, lags(1) reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq2_c: qui reg d.pib_pc l1.pib_pc ld.pib_pc, noconstant
+ qui dfuller pib_pc, lags(1) noconstant reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ esttab eq2_* using "$out\raiz_unitaria.tex", append f booktabs nomtitles nonumbers t(3) b(3) star(* 0.10 ** 0.05 *** 0.01)   ///
+        scalars("N Observations" "t_df Valor \textit{t}" "cv_1 DF 1\%" "cv_5 DF 5\%" "cv_10 DF 10\%") eqlabels(none) ///
+		coeflabels(L.pib_pc "(PIB per capita)$_{t-1}$" LD.pib_pc "$\Delta$ (PIB per capita)$_{t-1}$" trend "Tendencia" _cons "Constante") ///
+		refcat(L.pib_pc "\textbf{$\Delta$(PIB per capita)}", nolabel) 
 	
  * Remuneraciones I(1)
  varsoc remu, exog(year)                
- dfuller remu, lags(2) trend reg
- dfuller remu, lags(2) reg
- dfuller remu, lags(2) noconstant reg
+ 
+ eststo eq3_a: qui reg d.remu l1.remu ld.remu trend 
+ qui dfuller remu, lags(2) trend reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq3_b: qui reg d.remu l1.remu ld.remu 
+ qui dfuller remu, lags(2) reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq3_c: qui reg d.remu l1.remu ld.remu, noconstant
+ qui dfuller remu, lags(2) noconstant reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ esttab eq3_* using "$out\raiz_unitaria.tex", append f booktabs nomtitles nonumbers t(3) b(3) star(* 0.10 ** 0.05 *** 0.01)   ///
+        scalars("N Observations" "t_df Valor \textit{t}" "cv_1 DF 1\%" "cv_5 DF 5\%" "cv_10 DF 10\%") eqlabels(none) ///
+		coeflabels(L.remu "(Remuneraciones)$_{t-1}$" LD.remu "$\Delta$ (Remuneraciones)$_{t-1}$" trend "Tendencia" _cons "Constante") ///
+		refcat(L.remu "\textbf{$\Delta$(Remuneraciones)}", nolabel) 
 	
  * Tasa de interés real I(1)
  varsoc tir, exog(year)                
- dfuller tir, lags(0) trend reg
- dfuller tir, lags(0) reg
- dfuller tir, lags(0) noconstant reg
+ 
+ eststo eq4_a: qui reg d.tir l1.tir ld.tir trend 
+ qui dfuller tir, lags(0) trend reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq4_b: qui reg d.tir l1.tir ld.tir 
+ qui dfuller tir, lags(0) reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ eststo eq4_c: qui reg d.tir l1.tir ld.tir, noconstant
+ qui dfuller tir, lags(0) noconstant reg
+ estadd scalar t_df  = r(Zt)
+ estadd scalar cv_1  = r(cv_1)
+ estadd scalar cv_5  = r(cv_5)
+ estadd scalar cv_10 = r(cv_10)
+ 
+ esttab eq4_* using "$out\raiz_unitaria.tex", append f booktabs nomtitles nonumbers t(3) b(3) star(* 0.10 ** 0.05 *** 0.01)   ///
+        scalars("N Observations" "t_df Valor \textit{t}" "cv_1 DF 1\%" "cv_5 DF 5\%" "cv_10 DF 10\%") eqlabels(none) ///
+		coeflabels(L.tir "(Tasa de interés)$_{t-1}$" LD.tir "$\Delta$ (Tasa de interés)$_{t-1}$" trend "Tendencia" _cons "Constante") ///
+		refcat(L.tir "\textbf{$\Delta$(Tasa de interés)}", nolabel) 
 	
 
 	
@@ -111,8 +205,8 @@ global out: establece la dirección dónde se guardarán los resultados
  graph close _all	
  
  esttab eq_* using "$out\modelo.tex", replace f booktabs nomtitles se(2) b(3) star(* 0.10 ** 0.05 *** 0.01) scalars("N N" "r2 R$^2$" "rho $\rho$" "rmse RECM") ///
-             coeflabels(trib "Log(Presión tributaria)" pib_pc "Log(PIB per capita)" remu "Log(Remuneraciones)" D.tir "$\Delta$ (Log($1$ + Tasa de interés))"  ///
-			 trend "Tendencia" _cons "Constante"  dum09 "Dummy 2009" dum20 "Dummy 2020" dum21 "Dummy 2021") order(trib pib_pc remu D.tir dum09 dum20 dum21 trend _cons)
+        coeflabels(trib "Log(Presión tributaria)" pib_pc "Log(PIB per capita)" remu "Log(Remuneraciones)" D.tir "$\Delta$ (Log($1$ + Tasa de interés))"  ///
+		trend "Tendencia" _cons "Constante"  dum09 "Dummy 2009" dum20 "Dummy 2020" dum21 "Dummy 2021") order(trib pib_pc remu D.tir dum09 dum20 dum21 trend _cons)
 			 
  eststo drop *
  drop dif_ecm money_modelo
@@ -151,10 +245,15 @@ global out: establece la dirección dónde se guardarán los resultados
  gen velocidad = pib_nominal / circulante_total
  gen informalidad = (velocidad * circulante_informal) / pib_nominal
  
+ qui sum informalidad, d
+ gen ic_inferior = informalidad - ((`r(sd)'/`r(N)') * 1.96)
+ gen ic_superior = informalidad + ((`r(sd)'/`r(N)') * 1.96)
+ 
  qui sum informalidad 
  loc promedio: di %4.2fc r(mean) * 100
- tsline informalidad, xtitle("Año") ytitle("% del PIB") lwidth(medthick) text(0.42 2004 "Promedio = `promedio'%") ///
-       ylabel(0.4(0.2)0.5 0.4 "40%" 0.42 "42%" 0.44 "44%" 0.46 "46%" 0.48 "48%" 0.5 "50%") $graphop 
+ twoway (rcap ic_superior ic_inferior year, lc(blue%60)) (scatter informalidad year, mc(blue%60)) (line informalidad year, lc(blue%60)), ///
+        ylabel(0.4(0.2)0.5 0.4 "40%" 0.42 "42%" 0.44 "44%" 0.46 "46%" 0.48 "48%" 0.5 "50%") xtitle("Año") ytitle("% del PIB") ///
+		xscale(titlegap(3)) yscale(titlegap(3)) legend(order(1 "± 95%" 2 "Informalidad")) $graphop text(0.42 2004 "Promedio = `promedio'%")
  graph export "$out\informalidad_monetario.pdf", replace
  graph close _all
  
