@@ -18,8 +18,8 @@ global out: establece la dirección dónde se guardarán los resultados
 	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
  }
  else if "`c(username)'" == "Owner" {
-	 global path "C:\Users\Owner\OneDrive - SAR\Informalidad"
-	 global out  "C:\Users\Owner\OneDrive - SAR\Notas técnicas y papers\Economía informal\out informalidad"
+	 global path "C:\Users\bermu\Desktop\Informalidad"
+	 global out  "C:\Users\bermu\OneDrive - SAR\Notas técnicas y papers\Economía informal\out informalidad"
 	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
  }
  else if "`c(username)'" == "jcabrera" { 										// <- Usuario de Bayardo
