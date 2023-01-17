@@ -20,18 +20,6 @@ global out: establece la dirección dónde se guardarán los resultados
 	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
 	 global var "egd monet wb_egd wb_mimic schneider"
  }
- else if "`c(username)'" == "jcabrera" { 										// <- Usuario de Bayardo
-	 global path ""
-	 global out  ""
-	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
-	 global var "egd monet wb_egd wb_mimic schneider"
- }
- else if "`c(username)'" == "" {												// <- Usuario de Francisco
-	 global path ""
-	 global out  ""
-	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
-	 global var "egd monet wb_egd wb_mimic schneider"
- }
  
  * Paquetes necesario para reproducir el gráfico de matriz de correlaciones
  *ssc install heatplot, replace

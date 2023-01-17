@@ -22,16 +22,6 @@ global out: establece la dirección dónde se guardarán los resultados
 	 global out  "C:\Users\bermu\OneDrive - SAR\Notas técnicas y papers\Economía informal\out informalidad"
 	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
  }
- else if "`c(username)'" == "jcabrera" { 										// <- Usuario de Bayardo
-	 global path ""
-	 global out  ""
-	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
- }
- else if "`c(username)'" == "" {												// <- Usuario de Francisco
-	 global path ""
-	 global out  ""
-	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
- }
  
  
  
