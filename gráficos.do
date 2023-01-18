@@ -36,13 +36,13 @@ global out: establece la dirección dónde se guardarán los resultados
  
  * Gráficos
  twoway (scatter egd fecha, mcolor(blue%60) mlabel(egd) mlabposition(12) mlabsize(vsmall) mlabcolor(blue%60)) (line egd fecha, lc(blue%60)), ///
-        $graphop legend(order(1 "Estimación DGE")) xtitle("Año") ytitle("% del PIB") xscale(titlegap(3)) yscale(titlegap(3)) ///
+        $graphop legend(order(1 "Estimación EGD")) xtitle("Año") ytitle("% del PIB") xscale(titlegap(3)) yscale(titlegap(3)) ///
         ylabel(40(2)50 40 "40%" 42 "42%" 44 "44%" 46 "46%" 48 "48%" 50 "50%")
  graph export "$out\estimaciones_propias1.pdf", replace
  
  twoway (scatter egd fecha, mcolor(blue%60) mlabel(egd) mlabposition(12) mlabsize(vsmall) mlabcolor(blue%60)) (line egd fecha, lc(blue%60)) /// 
         (scatter monet fecha, mcolor(red%60)  mlabel(monet) mlabposition(12) mlabsize(vsmall) mlabcolor(red%60)) (line monet fecha, lc(red%60)), ///
-        $graphop legend(order(1 "Estimación DGE" 3 "Estimación Circulante")) xtitle("Año") ytitle("% del PIB") xscale(titlegap(3)) yscale(titlegap(3)) ///
+        $graphop legend(order(1 "Estimación EGD" 3 "Estimación Circulante")) xtitle("Año") ytitle("% del PIB") xscale(titlegap(3)) yscale(titlegap(3)) ///
         ylabel(40(2)50 40 "40%" 42 "42%" 44 "44%" 46 "46%" 48 "48%" 50 "50%")
  graph export "$out\estimaciones_propias.pdf", replace
  
@@ -51,7 +51,7 @@ global out: establece la dirección dónde se guardarán los resultados
 		(line wb_egd fecha,     lc(green)) ///
 		(line wb_mimic fecha,   lc(cyan)) ///
 		(line schneider fecha,  lc(gold)), ///
-        $graphop legend(row(2) order(1 "DGE" 2 "Circulante" 3 "WB EGD" 4 "WB MIMIC" 5 "Schneider (2018)")) xtitle("Año") ytitle("% del PIB") xscale(titlegap(3)) yscale(titlegap(3)) ///
+        $graphop legend(row(2) order(1 "EGD" 2 "Circulante" 3 "WB EGD" 4 "WB MIMIC" 5 "Schneider (2018)")) xtitle("Año") ytitle("% del PIB") xscale(titlegap(3)) yscale(titlegap(3)) ///
         ylabel(36(4)52 36 "36%" 40 "40%" 44 "44%" 48 "48%" 52 "52%")
  graph export "$out\estimaciones_comparativas.pdf", replace
  
@@ -62,8 +62,8 @@ global out: establece la dirección dónde se guardarán los resultados
  
  heatplot Correlación, $graphop values(format(%9.2f)) color(hcl redblue, reverse intensity(0.1(0.2)1)) ///
           aspectratio(1) lower keylabels(, interval format(%9.2f)) cuts(0.55(0.05)1) ///
-		  ylabel(1 "DGE" 2 "Circulante" 3 "WB EGD" 4 "WB MIMIC" 5 "Schneider (2018)", nogrid labsize(small)) ///
-		  xlabel(1 "DGE" 2 "Circulante" 3 "WB EGD" 4 "WB MIMIC" 5 "Schneider (2018)", nogrid labsize(small) angle(45))
+		  ylabel(1 "EGD" 2 "Circulante" 3 "WB EGD" 4 "WB MIMIC" 5 "Schneider (2018)", nogrid labsize(small)) ///
+		  xlabel(1 "EGD" 2 "Circulante" 3 "WB EGD" 4 "WB MIMIC" 5 "Schneider (2018)", nogrid labsize(small) angle(45))
  graph export "$out\heatplot.pdf", replace
  
  
@@ -72,7 +72,7 @@ global out: establece la dirección dónde se guardarán los resultados
  est store sumario
  
  esttab sumario using "$out\sumario_informalidad", replace label booktabs nonum f noobs gap ///
-	   coeflabel(egd "DGE" monet "Circulante" wb_egd "WB EGD" wb_mimic "WB MIMIC" schneider "Schneider (2018)")  ///
+	   coeflabel(egd "EGD" monet "Circulante" wb_egd "WB EGD" wb_mimic "WB MIMIC" schneider "Schneider (2018)")  ///
 	   cells("mean(fmt(%20.2fc)) sd(fmt(%20.2fc)) min(fmt(%20.2fc)) p25(fmt(%20.2fc)) p50(fmt(%20.2fc)) p75(fmt(%20.2fc)) max(fmt(%20.2fc)) count(fmt(%20.0fc))") ///
 	   collabels("Media" "Desv. Est." "Min" "25\%" "50\%" "75\%" "Max" "N° Obs.")
  
