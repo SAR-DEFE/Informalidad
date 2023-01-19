@@ -1,0 +1,1 @@
+Este repositorio contiene los códigos de Python y Stata para replicar los resultados del Documento de Trabajo N° 01-2023: "Estimación de la Informalidad en Honduras", elaborado por Jose Bayardo Cabrera (SAR de Honduras), Francisco Henriquez (SII de Chile) y Jose Carlo Bermúdez (SAR de Honduras). Las bases de datos necesarias también se encuentran disponibles en este repositorio.
