@@ -2,6 +2,7 @@
 Título: estimación_monetaria.do
 Detalle: do file empleado para estimar la economía informal de Honduras 2001-2021
 		 usando el método de demanda del circulante.
+Autor: Jose Carlo Bermúdez		 
 */
 
  clear all
