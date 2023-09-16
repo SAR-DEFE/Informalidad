@@ -20,7 +20,7 @@ global out: establece la dirección dónde se guardarán los resultados
  }
  else if "`c(username)'" == "Jose Carlo Bermúdez" {
 	 global path "C:\Users\bermu\Desktop\Informalidad"
-	 global out  "C:\Users\bermu\OneDrive - SAR\Notas técnicas y papers\Economía informal\out informalidad"
+	 global out  "C:\Users\bermu\Desktop\Notas técnicas y papers\Economía informal\out informalidad"
 	 global graphop "legend(region(lcolor(none))) graphr(color(white))"
  }
  
